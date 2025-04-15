@@ -14,8 +14,8 @@ public static class Extensions
         services.AddSingleton<ErrorHandlerMiddleware>();
         services.AddSingleton<HttpContextHelper>();
         
-        services.AddSingleton<IEventPublisher, EventPublisher>();
-        services.AddHostedService<EventListener>();
+        // services.AddSingleton<IEventPublisher, EventPublisher>();
+        // services.AddHostedService<EventListener>();
         
         return services;
     }    

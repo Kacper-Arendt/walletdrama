@@ -8,8 +8,8 @@ public static class ModuleLoader
     public static WebApplicationBuilder RegisterModules(this WebApplicationBuilder builder) {
         builder.Services.AddInfrastructure();
         builder.RegisterAuthModule();
-        
-        // builder.Services.AddControllers()
+
+        builder.Services.AddControllers();
             // .AddApplicationPart(typeof(LanguagesController).Assembly);
 
         return builder;
