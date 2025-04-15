@@ -1,0 +1,6 @@
+@WalletDrama.Bootstrapper_HostAddress = http://localhost:5269
+
+GET {{WalletDrama.Bootstrapper_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
