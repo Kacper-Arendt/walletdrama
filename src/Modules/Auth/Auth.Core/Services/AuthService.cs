@@ -30,10 +30,12 @@ public class AuthService : IAuthService
         return new RegisterUserResponseDto(user.Id);
     }
 
-    public async Task<CurrentUserResponseDto?> GetCurrentUserName()
+    public async Task<CurrentUserResponseDto?> GetCurrentUser()
     {
         var name =  _httpContextAccessor.HttpContext?.User.Identity?.Name;
+        var user = await _userManager.FindByEmailAsync(name);
+        var roles = await _userManager.GetRolesAsync(user);
 
-        return name == null ? null : new CurrentUserResponseDto(name);
+        return name == null ? null : new CurrentUserResponseDto(name, user.Id, roles);
     }
 }
