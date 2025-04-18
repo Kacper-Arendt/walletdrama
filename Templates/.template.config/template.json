@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Kacper Arendt",
+  "classifications": [ "Modular", "Monolith" ],
+  "identity": "Wallet.Drama.Template",
+  "name": "Modular Module (API + Core)",
+  "shortName": "wdmodule",
+  "sourceName": "__ModuleName__",
+  "preferNameDirectory": true,
+  "symbols": {
+    "ModuleName": {
+      "type": "parameter",
+      "datatype": "text",
+      "replaces": "__ModuleName__",
+      "defaultValue": "MyModule"
+    }
+  }
+}
