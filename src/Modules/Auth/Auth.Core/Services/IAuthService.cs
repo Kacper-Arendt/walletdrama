@@ -6,4 +6,5 @@ public interface IAuthService
 {
     Task<RegisterUserResponseDto> RegisterUser(RegisterUserDto registerUserDto);
     Task<CurrentUserResponseDto?> GetCurrentUser();
+    Task Logout();
 }

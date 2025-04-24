@@ -31,4 +31,12 @@ public class AuthController : ControllerBase
         var user = await _authService.GetCurrentUser();
         return Ok(user);
     }
+    
+    [HttpPost("Logout")]
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        await _authService.Logout();
+        return NoContent();
+    }
 }
