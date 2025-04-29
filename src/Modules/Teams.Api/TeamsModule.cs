@@ -1,10 +1,6 @@
-using Auth.Core;
-using Auth.Core.Database;
-using Auth.Core.Entities;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
+using Teams.Core;
+using Teams.Persistence;
 
 namespace Teams.Api;
 
@@ -12,8 +8,9 @@ public static class TeamsModule
 {
     public static WebApplicationBuilder RegisterTeamsModule(this WebApplicationBuilder builder)
     {
-        builder.Services.AddMyModuleCore(builder.Configuration); 
-        
+        builder.Services.AddTeamsPersistence();
+        builder.Services.AddTeamsCore();
+
         return builder;
     }
 
