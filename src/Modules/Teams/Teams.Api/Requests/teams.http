@@ -1,0 +1,29 @@
+@url = http://localhost:5269/api
+
+### POST create team
+POST {{url}}/teams
+Content-Type: application/json
+
+{
+  "name": "Default"
+}
+
+### PUT Update team
+PUT {{url}}/teams/826ecb42-4274-4d3c-9c3b-58a2a078e504
+Content-Type: application/json
+
+{
+  "id": "826ecb42-4274-4d3c-9c3b-58a2a078e504",
+  "name": "New"
+}
+
+### DELETE team
+DELETE {{url}}/teams/826ecb42-4274-4d3c-9c3b-58a2a078e504
+Content-Type: application/json
+
+### GET team
+GET {{url}}/teams/dbe8aad5-0874-4199-b151-cfbf079f73f9
+
+
+### GET all teams
+GET {{url}}/teams

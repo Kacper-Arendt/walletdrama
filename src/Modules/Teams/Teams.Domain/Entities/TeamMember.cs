@@ -6,7 +6,7 @@ namespace Teams.Domain.Entities;
 
 public class TeamMember
 {
-    public ValueObjects.TeamMemberId MemberId { get; set; }
+    public TeamMemberId MemberId { get; set; }
     public TeamId TeamId { get; set; }
     public UserId UserId { get; set; }
     public Email Email { get; set; }

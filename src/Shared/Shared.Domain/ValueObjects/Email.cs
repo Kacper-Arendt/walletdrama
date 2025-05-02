@@ -1,3 +1,4 @@
+using Shared.Abstractions.Exceptions;
 using Shared.Abstractions.ValueObjects;
 
 namespace Shared.Domain.ValueObjects;
@@ -9,10 +10,10 @@ public class Email : ValueObject
     public Email(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentException("Email cannot be empty.", nameof(value));
+            throw new ValueObjectInvalidTypeException("Email cannot be empty.");
         
         if (value.Length > 100)
-            throw new ArgumentException("Email cannot exceed 100 characters.", nameof(value));
+            throw new ValueObjectInvalidTypeException("Email cannot exceed 100 characters.");
 
         Value = value;
     }

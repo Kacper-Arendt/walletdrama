@@ -9,7 +9,6 @@ Content-Type: application/json
   "password": "Test123!"
 }
  
-
 ### POST Login user
 POST {{url}}/auth/identity/Login?useCookies=true
 Content-Type: application/json

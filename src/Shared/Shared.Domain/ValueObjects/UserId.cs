@@ -1,3 +1,4 @@
+using Shared.Abstractions.Exceptions;
 using Shared.Abstractions.ValueObjects;
 
 namespace Shared.Domain.ValueObjects;
@@ -9,7 +10,7 @@ public class UserId : ValueObject
     public UserId(Guid value)
     {
         if (value == Guid.Empty)
-            throw new ArgumentException("UserId cannot be empty.", nameof(value));
+            throw new ValueObjectInvalidTypeException("UserId cannot be empty.");
 
         Value = value;
     }

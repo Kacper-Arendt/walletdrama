@@ -1,3 +1,4 @@
+using Shared.Abstractions.Exceptions;
 using Shared.Abstractions.ValueObjects;
 
 namespace Teams.Domain.ValueObjects;
@@ -9,10 +10,10 @@ public class TeamName : ValueObject
     public TeamName(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentException("Team name cannot be empty.", nameof(value));
+            throw new ValueObjectInvalidTypeException("Team name cannot be empty.");
 
         if (value.Length > 100)
-            throw new ArgumentException("Team name cannot exceed 100 characters.", nameof(value));
+            throw new ValueObjectInvalidTypeException("Team name cannot exceed 100 characters.");
 
         Value = value;
     }

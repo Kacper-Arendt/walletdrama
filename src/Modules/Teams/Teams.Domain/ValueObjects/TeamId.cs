@@ -1,3 +1,4 @@
+using Shared.Abstractions.Exceptions;
 using Shared.Abstractions.ValueObjects;
 
 namespace Teams.Domain.ValueObjects;
@@ -9,7 +10,7 @@ public class TeamId : ValueObject
     public TeamId(Guid value)
     {
         if (value == Guid.Empty)
-            throw new ArgumentException("TeamId cannot be empty.", nameof(value));
+            throw new ValueObjectInvalidTypeException("TeamId cannot be empty.");
 
         Value = value;
     }
