@@ -24,13 +24,14 @@ public class TeamsQueryService : ITeamsQueryService
         var team = await _dbContext.Teams
             .Include(t => t.Members)
             .AsNoTracking()
-            // todo fix owner id
-            .FirstOrDefaultAsync(t => t.Id == teamId && t.OwnerId == user.Id);
+            .FirstOrDefaultAsync(t => t.Id == teamId && t.Members.Any(m => m.UserId == user.Id));
 
         if (team == null) throw new TeamNotFoundException(teamId);
 
-        // TODO: add team members dto
-        return new TeamDetailsDto(team.Id.Value, team.Name.Value, team.OwnerId.Value, team.Members);
+        var teamMembers = team.Members
+            .Select(m => new TeamMemberDto(m.UserId.Value, m.Email.Value, m.Role.ToString()))
+            .ToList();
+        return new TeamDetailsDto(team.Id.Value, team.Name.Value, team.OwnerId.Value, teamMembers);
     }
 
     public async Task<IEnumerable<TeamDto>> GetListAsync()
@@ -39,8 +40,8 @@ public class TeamsQueryService : ITeamsQueryService
 
         var teams = await _dbContext.Teams
             .AsNoTracking()
-            .Where(t => t.OwnerId == user.Id)
-            // todo fix owner id to member id 
+            .Include(t => t.Members)
+            .Where(t => t.Members.Any(m => m.UserId == user.Id))
             .Select(t => new TeamDto(t.Id.Value, t.Name.Value, t.OwnerId.Value))
             .ToListAsync();
 
