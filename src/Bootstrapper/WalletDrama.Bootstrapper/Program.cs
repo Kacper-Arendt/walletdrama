@@ -1,3 +1,4 @@
+using Azure.Identity;
 using Scalar.AspNetCore;
 using WalletDrama.Bootstrapper.DI;
 
@@ -15,10 +16,10 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: false,reloadOnChange: true)
     .AddJsonFile(jsonFile, optional: true);
 
-// var keyVaultUrl = builder.Configuration["KeyVault"];
+var keyVaultUrl = builder.Configuration["KeyVault"];
 
-// var credentials = new DefaultAzureCredential ();
-// builder.Configuration.AddAzureKeyVault(new Uri(keyVaultUrl), credentials);
+var credentials = new DefaultAzureCredential ();
+builder.Configuration.AddAzureKeyVault(new Uri(keyVaultUrl), credentials);
 
 builder.Services.AddCors(options =>
 {
