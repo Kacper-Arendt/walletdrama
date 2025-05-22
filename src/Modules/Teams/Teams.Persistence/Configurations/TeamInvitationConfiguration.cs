@@ -17,20 +17,22 @@ public class TeamInvitationConfiguration : IEntityTypeConfiguration<TeamInvitati
             .IsRequired()
             .HasConversion<TeamIdConverter>();
 
-        builder.Property(t => t.UserId)
+        builder.Property(t => t.Email)
             .IsRequired()
-            .HasConversion<UserIdConverter>();
+            .HasConversion<EmailConverter>();
+
+        builder.Property(t => t.Role).IsRequired();
 
         builder.Property(t => t.CreatedAt).IsRequired();
         builder.Property(t => t.Status).IsRequired();
 
-        builder.HasIndex(t => t.UserId)
-            .HasDatabaseName("IX_TeamInvitations_UserId");
+        builder.HasIndex(t => t.Email)
+            .HasDatabaseName("IX_TeamInvitations_Email");
 
         builder.HasIndex(t => t.TeamId)
             .HasDatabaseName("IX_TeamInvitations_TeamId");
 
-        builder.HasIndex(t => new { t.TeamId, t.UserId })
+        builder.HasIndex(t => new { t.TeamId, t.Email })
             .IsUnique()
             .HasDatabaseName("UQ_TeamInvitations_TeamId_UserId");
     }

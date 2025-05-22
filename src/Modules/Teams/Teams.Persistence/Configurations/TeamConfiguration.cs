@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Shared.Domain.ValueObjects;
 using Teams.Domain.Entities;
 using Teams.Domain.ValueObjects;
 using Teams.Persistence.Converters;

@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using Shared.Domain.ValueObjects;
+using Shared.Abstractions.ValueObjects;
 
 namespace Shared.Infrastructure.Helpers;
 

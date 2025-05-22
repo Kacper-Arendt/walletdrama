@@ -53,24 +53,28 @@ namespace Teams.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<Guid>("TeamId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .HasDatabaseName("IX_TeamInvitations_Email");
 
                     b.HasIndex("TeamId")
                         .HasDatabaseName("IX_TeamInvitations_TeamId");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("IX_TeamInvitations_UserId");
-
-                    b.HasIndex("TeamId", "UserId")
+                    b.HasIndex("TeamId", "Email")
                         .IsUnique()
                         .HasDatabaseName("UQ_TeamInvitations_TeamId_UserId");
 

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Shared.Domain.ValueObjects;
+using Shared.Abstractions.ValueObjects;
 using Teams.Domain.ValueObjects;
 
 namespace Teams.Persistence.Converters;

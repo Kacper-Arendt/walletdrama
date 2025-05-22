@@ -1,4 +1,4 @@
-using Shared.Domain.ValueObjects;
+using Shared.Abstractions.ValueObjects;
 using Teams.Domain.ValueObjects;
 
 namespace Teams.Domain.Entities;

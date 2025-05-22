@@ -33,7 +33,9 @@ public class IsTeamOwnerHandler : AuthorizationHandler<IsTeamOwnerRequirement>
         }
 
         var user = _httpContextHelper.GetCurrentUser();
-        if (!await _teamsQueryService.IsUserOwnerOfTeamAsync(user.Id.Value, teamId))
+        var isOwner = await _teamsQueryService.IsUserOwnerOfTeamAsync(user.Id, teamId);
+        
+        if (!isOwner)
         {
             context.Fail();
             return;

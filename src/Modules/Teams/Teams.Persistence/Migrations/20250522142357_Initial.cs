@@ -21,8 +21,9 @@ namespace Teams.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TeamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -68,22 +69,22 @@ namespace Teams.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_TeamInvitations_Email",
+                schema: "Teams",
+                table: "TeamInvitations",
+                column: "Email");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TeamInvitations_TeamId",
                 schema: "Teams",
                 table: "TeamInvitations",
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeamInvitations_UserId",
-                schema: "Teams",
-                table: "TeamInvitations",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "UQ_TeamInvitations_TeamId_UserId",
                 schema: "Teams",
                 table: "TeamInvitations",
-                columns: new[] { "TeamId", "UserId" },
+                columns: new[] { "TeamId", "Email" },
                 unique: true);
 
             migrationBuilder.CreateIndex(

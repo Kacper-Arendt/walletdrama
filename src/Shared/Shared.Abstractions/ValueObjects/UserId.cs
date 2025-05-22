@@ -1,7 +1,6 @@
 using Shared.Abstractions.Exceptions;
-using Shared.Abstractions.ValueObjects;
 
-namespace Shared.Domain.ValueObjects;
+namespace Shared.Abstractions.ValueObjects;
 
 public class UserId : ValueObject
 {

@@ -6,10 +6,7 @@ using Teams.Core.Queries;
 
 namespace Teams.Api.Controllers;
 
-[ApiController]
-[Route("api/teams")]
-[Authorize]
-public class TeamsController : ControllerBase
+public class TeamsController : BaseController
 {
     private readonly ITeamsCommandService _teamsCommandService;
     private readonly ITeamsQueryService _teamsQueryService;

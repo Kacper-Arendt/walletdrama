@@ -1,4 +1,3 @@
-using Shared.Domain.ValueObjects;
 using Teams.Domain.ValueObjects;
 
 namespace Teams.Core.Queries.Dtos;

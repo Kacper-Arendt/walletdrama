@@ -5,7 +5,7 @@ POST {{url}}/Auth/Register
 Content-Type: application/json
 
 {
-  "email": "test@test.com",
+  "email": "kacper.arendt@erecruiter.pl",
   "password": "Test123!"
 }
  

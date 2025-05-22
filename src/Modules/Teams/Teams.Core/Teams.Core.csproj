@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Teams.Persistence\Teams.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-  </ItemGroup>
-
 </Project>

@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Shared.Abstractions.Communication;
 using Shared.Abstractions.Events;
 using Shared.Abstractions.Factories;
+using Shared.Abstractions.ValueObjects;
+using Shared.Infrastructure.Communication;
 using Shared.Infrastructure.Events;
 using Shared.Infrastructure.Exceptions;
 using Shared.Infrastructure.Factories;
@@ -16,6 +19,7 @@ public static class Extensions
         services.AddSingleton<ErrorHandlerMiddleware>();
         services.AddSingleton<HttpContextHelper>();
         services.AddSingleton<IDbConnectionStringFactory, DbConnectionStringFactory>();
+        services.AddSingleton<IEmailSender, AzureEmailSender>();
 
         // services.AddSingleton<IEventPublisher, EventPublisher>();
         // services.AddHostedService<EventListener>();

@@ -1,4 +1,3 @@
-using Shared.Domain.ValueObjects;
 using Teams.Domain.Entities;
 using Teams.Domain.ValueObjects;
 
