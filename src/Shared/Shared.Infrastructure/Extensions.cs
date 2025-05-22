@@ -21,8 +21,8 @@ public static class Extensions
         services.AddSingleton<IDbConnectionStringFactory, DbConnectionStringFactory>();
         services.AddSingleton<IEmailSender, AzureEmailSender>();
 
-        // services.AddSingleton<IEventPublisher, EventPublisher>();
-        // services.AddHostedService<EventListener>();
+        services.AddSingleton<IEventPublisher, EventPublisher>();
+        services.AddHostedService<EventListener>();
         
         return services;
     }    

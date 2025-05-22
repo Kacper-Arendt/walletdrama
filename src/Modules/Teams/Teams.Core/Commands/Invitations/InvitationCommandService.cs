@@ -1,6 +1,7 @@
-using Shared.Abstractions.Communication;
+using Shared.Abstractions.Events;
 using Shared.Abstractions.ValueObjects;
 using Teams.Core.Commands.Invitations.Dtos;
+using Teams.Core.Events;
 using Teams.Core.Exceptions;
 using Teams.Domain.Const;
 using Teams.Domain.Entities;
@@ -12,12 +13,12 @@ namespace Teams.Core.Commands.Invitations;
 public class InvitationCommandService : IInvitationCommandService
 {
     private readonly TeamsDbContext _dbContext;
-    private readonly IEmailSender _emailSender;
+    private readonly IEventPublisher _eventPublisher;
 
-    public InvitationCommandService(TeamsDbContext dbContext, IEmailSender emailSender)
+    public InvitationCommandService(TeamsDbContext dbContext, IEventPublisher eventPublisher)
     {
         _dbContext = dbContext;
-        _emailSender = emailSender;
+        _eventPublisher = eventPublisher;
     }
 
     public async Task SendAsync(TeamId teamId, InvitationDto invitationDto)
@@ -38,20 +39,13 @@ public class InvitationCommandService : IInvitationCommandService
         await _dbContext.TeamInvitations.AddAsync(invitation);
         await _dbContext.SaveChangesAsync();
 
-        var body = $"""
-                    <p style='color:#555;font-size:16px;font-family:sans-serif;margin-bottom:32px;'>
-                        You have been invited to join the team <strong>{team.Name.Value}</strong>. Click below to accept the invitation.
-                    </p>
-                    <a href='xx' style='display:inline-block;padding:12px 28px;background-color:#4f46e5;color:#fff;text-decoration:none;border-radius:4px;font-size:16px;font-family:sans-serif;'>
-                        Accept Invitation
-                    </a>
-                    """;
-
-        await _emailSender.SendEmailAsync(
-            [invitation.Email],
-            "Invitation to join team",
-            body
+        var invitationCreatedEvent = new InvitationCreatedEvent(
+            invitation.Id,
+            invitation.Email,
+            team.Name,
+            invitation.Role
         );
+        await _eventPublisher.PublishAsync(invitationCreatedEvent);
     }
 
     public async Task AcceptAsync(Guid invitationId)

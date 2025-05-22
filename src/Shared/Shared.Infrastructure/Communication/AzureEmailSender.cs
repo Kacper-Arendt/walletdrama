@@ -6,10 +6,16 @@ using Shared.Abstractions.ValueObjects;
 
 namespace Shared.Infrastructure.Communication;
 
-public class AzureEmailSender(IConfiguration configuration) : IEmailSender
+public class AzureEmailSender : IEmailSender
 {
-    private readonly EmailClient _client = new(configuration["Email:ConnectionString"]);
-    private readonly string _fromAddress = configuration["Email:From"] ?? throw new ArgumentNullException("Email:From");
+    private readonly EmailClient _client;
+    private readonly string _fromAddress;
+    
+    public AzureEmailSender(IConfiguration configuration)
+    {
+        _client = new EmailClient(configuration["EmailService:ConnectionString"]);
+        _fromAddress = configuration["EmailService:From"];
+    }
 
     public async Task SendEmailAsync(List<Email> mails, string subject, string body)
     {
