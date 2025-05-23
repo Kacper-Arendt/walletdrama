@@ -60,14 +60,12 @@ public class InvitationCommandService : IInvitationCommandService
 
         await _dbContext.SaveChangesAsync();
 
-        var invitationAcceptedEvent = new InvitationAcceptedEvent(
-            invitation.Id,
-            invitation.Email
-            invitation.TeamId,
-            invitation.Role
-        );
-
-        
+        // var invitationAcceptedEvent = new InvitationAcceptedEvent(
+        //     invitation.Id,
+        //     invitation.Email
+        //     invitation.TeamId,
+        //     invitation.Role
+        // );
     }
 
     public async Task RejectAsync(Guid invitationId)
