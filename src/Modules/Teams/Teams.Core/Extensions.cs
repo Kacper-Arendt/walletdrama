@@ -32,6 +32,7 @@ public static class Extensions
         services.AddScoped<IAuthorizationHandler, IsInvitationRecipientHandler>();
         
         services.AddScoped<IEventHandler<InvitationCreatedEvent>, InvitationCreatedEventHandler>();
+        services.AddScoped<IEventHandler<InvitationAcceptedEvent>, InvitationAcceptedEventHandler>();
 
         return services;
     }

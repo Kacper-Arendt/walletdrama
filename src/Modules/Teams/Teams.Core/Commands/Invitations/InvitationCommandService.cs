@@ -59,6 +59,15 @@ public class InvitationCommandService : IInvitationCommandService
         // Throw event to notify other services about the acceptance
 
         await _dbContext.SaveChangesAsync();
+
+        var invitationAcceptedEvent = new InvitationAcceptedEvent(
+            invitation.Id,
+            invitation.Email
+            invitation.TeamId,
+            invitation.Role
+        );
+
+        
     }
 
     public async Task RejectAsync(Guid invitationId)
