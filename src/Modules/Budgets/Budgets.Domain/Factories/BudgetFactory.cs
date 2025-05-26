@@ -8,12 +8,8 @@ public static class BudgetFactory
 {
     public static Budget Create(UserId ownerId, BudgetName name, string description)
     {
-        var details = new BudgetDetails
-        {
-            Name = name,
-            Description = description
-        };
+        var details = new BudgetDetails(name, description);
 
-        return new Budget(ownerId, details);
+        return new Budget(new BudgetId(Guid.NewGuid()), ownerId, details);
     }
 }

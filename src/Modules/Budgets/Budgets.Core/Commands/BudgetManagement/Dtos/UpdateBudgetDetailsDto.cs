@@ -6,7 +6,7 @@ namespace Budgets.Core.Commands.BudgetManagement.Dtos;
 public class UpdateBudgetDetailsDto
 {
     [Required]
-    public BudgetId Id { get; set; }
+    public Guid Id { get; set; }
     
     [Required]
     [StringLength(255, MinimumLength = 3)]

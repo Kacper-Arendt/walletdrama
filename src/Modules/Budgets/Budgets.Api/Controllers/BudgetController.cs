@@ -19,7 +19,7 @@ public class BudgetController : BudgetBaseController
         CancellationToken cancellationToken)
     {
         var budgetId = await _budgetManagementService.CreateAsync(createBudgetDto, cancellationToken);
-        return Ok(new { Id = budgetId });
+        return Ok(new { Id = budgetId.Value });
     }
 
     [HttpPut]
@@ -27,7 +27,7 @@ public class BudgetController : BudgetBaseController
     public async Task<IActionResult> UpdateBudgetDetails(Guid budgetId, [FromBody] UpdateBudgetDetailsDto detailsDto,
         CancellationToken cancellationToken)
     {
-        var isValid = detailsDto.Id.Equals(new BudgetId(budgetId));
+        var isValid = new BudgetId(detailsDto.Id).Equals(new BudgetId(budgetId));
         if (!isValid)
         {
             return BadRequest("Budget ID in the URL does not match the ID in the request body.");

@@ -20,7 +20,9 @@ namespace Budgets.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                    OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Details_Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Details_Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,10 +30,10 @@ namespace Budgets.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Budgets_Name",
+                name: "IX_Teams_OwnerId",
                 schema: "Budgets",
                 table: "Budget",
-                column: "Name");
+                column: "OwnerId");
         }
 
         /// <inheritdoc />

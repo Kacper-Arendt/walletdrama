@@ -28,23 +28,44 @@ namespace Budgets.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .HasDatabaseName("IX_Budgets_Name");
-
                     b.HasIndex("OwnerId")
                         .HasDatabaseName("IX_Teams_OwnerId");
 
                     b.ToTable("Budget", "Budgets");
+                });
+
+            modelBuilder.Entity("Budgets.Domain.Entities.Budget", b =>
+                {
+                    b.OwnsOne("Budgets.Domain.Entities.BudgetDetails", "Details", b1 =>
+                        {
+                            b1.Property<Guid>("BudgetId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Description")
+                                .IsRequired()
+                                .HasMaxLength(1000)
+                                .HasColumnType("nvarchar(1000)");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
+
+                            b1.HasKey("BudgetId");
+
+                            b1.ToTable("Budget", "Budgets");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BudgetId");
+                        });
+
+                    b.Navigation("Details")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

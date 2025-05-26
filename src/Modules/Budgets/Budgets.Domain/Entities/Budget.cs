@@ -5,13 +5,18 @@ namespace Budgets.Domain.Entities;
 
 public class Budget
 {
-    public BudgetId Id { get; private set; }
-    public UserId OwnerId { get; }
+    public BudgetId Id { get; init; }
+    public UserId OwnerId { get; init; }
 
-    public BudgetDetails Details { get; }
+    public BudgetDetails Details { get; init; }
 
-    public Budget(UserId ownerId, BudgetDetails details)
+    private Budget()
     {
+    }
+
+    public Budget(BudgetId id, UserId ownerId, BudgetDetails details)
+    {
+        Id = id;
         OwnerId = ownerId;
         Details = details;
     }
