@@ -16,12 +16,22 @@ public class BudgetConfiguration : IEntityTypeConfiguration<Budget>
             .IsRequired()
             .HasConversion<BudgetIdConverter>();
 
-        builder.Property(b => b.Name)
-            .IsRequired()
-            .HasMaxLength(255)
-            .HasConversion<BudgetNameConverter>();
+        builder.OwnsOne(x => x.Details, d =>
+        {
+            d.Property(p => p.Name)
+                .IsRequired()
+                .HasMaxLength(255)
+                .HasConversion<BudgetNameConverter>();
 
-        builder.HasIndex(b => b.Name)
-            .HasDatabaseName("IX_Budgets_Name");
+            d.Property(p => p.Description)
+                .HasMaxLength(1000);
+        });
+
+        builder.Property(t => t.OwnerId)
+            .IsRequired()
+            .HasConversion<UserIdConverter>();
+
+        builder.HasIndex(t => t.OwnerId)
+            .HasDatabaseName("IX_Teams_OwnerId");
     }
 }

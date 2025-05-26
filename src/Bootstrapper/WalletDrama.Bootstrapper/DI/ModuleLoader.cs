@@ -1,4 +1,6 @@
 using Auth.Api;
+using Budgets.Api;
+using Budgets.Api.Controllers;
 using Shared.Infrastructure;
 using Teams.Api;
 using Teams.Api.Controllers;
@@ -11,9 +13,11 @@ public static class ModuleLoader
     {
         builder.Services.AddInfrastructure();
         builder.RegisterAuthModule();
+        builder.RegisterBudgetsModule();
         builder.RegisterTeamsModule();
 
         builder.Services.AddControllers()
+            .AddApplicationPart(typeof(BudgetBaseController).Assembly)
             .AddApplicationPart(typeof(TeamsController).Assembly);
 
         return builder;
@@ -23,6 +27,7 @@ public static class ModuleLoader
     {
         app.UseInfrastructure();
         app.UseAuthModule();
+        app.UseBudgetsModule();
         app.UseTeamsModule();
 
         return app;

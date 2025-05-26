@@ -1,0 +1,47 @@
+using Budgets.Core.Commands.BudgetManagement.Dtos;
+using Budgets.Core.Commands.BudgetManagement.Services;
+using Budgets.Domain.ValueObjects;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Budgets.Api.Controllers;
+
+public class BudgetController : BudgetBaseController
+{
+    private readonly IBudgetManagement _budgetManagementService;
+
+    public BudgetController(IBudgetManagement budgetManagementService)
+    {
+        _budgetManagementService = budgetManagementService;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateBudget([FromBody] CreateBudgetDto createBudgetDto,
+        CancellationToken cancellationToken)
+    {
+        var budgetId = await _budgetManagementService.CreateAsync(createBudgetDto, cancellationToken);
+        return Ok(new { Id = budgetId });
+    }
+
+    [HttpPut]
+    [Route("{budgetId:guid}")]
+    public async Task<IActionResult> UpdateBudgetDetails(Guid budgetId, [FromBody] UpdateBudgetDetailsDto detailsDto,
+        CancellationToken cancellationToken)
+    {
+        var isValid = detailsDto.Id.Equals(new BudgetId(budgetId));
+        if (!isValid)
+        {
+            return BadRequest("Budget ID in the URL does not match the ID in the request body.");
+        }
+
+        await _budgetManagementService.UpdateDetailsAsync(detailsDto, cancellationToken);
+        return NoContent();
+    }
+
+    [HttpDelete]
+    [Route("{budgetId:guid}")]
+    public async Task<IActionResult> DeleteBudget(Guid budgetId, CancellationToken cancellationToken)
+    {
+        await _budgetManagementService.DeleteAsync(budgetId, cancellationToken);
+        return NoContent();
+    }
+}
