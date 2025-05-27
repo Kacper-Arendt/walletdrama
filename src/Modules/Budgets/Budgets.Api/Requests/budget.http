@@ -27,7 +27,7 @@ DELETE {{url}}/budgets/{{id}}
 Content-Type: application/json
 
 ### GET budget
-GET {{url}}/budgets/dbe8aad5-0874-4199-b151-cfbf079f73f9
+GET {{url}}/budgets/f7246720-18b5-4e14-a365-f52761d1e146
 
 ### GET all budgets
 GET {{url}}/budgets

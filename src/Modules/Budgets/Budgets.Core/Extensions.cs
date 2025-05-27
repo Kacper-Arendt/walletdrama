@@ -1,4 +1,5 @@
 using Budgets.Core.Commands.BudgetManagement.Services;
+using Budgets.Core.Queries.Budget;
 using Budgets.Persistence;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +12,7 @@ public static class Extensions
         services.AddBudgetsPersistence();
 
         services.AddScoped<IBudgetManagement, BudgetManagementService>();
+        services.AddScoped<IBudgetQueryService, BudgetQueryService>();
 
         return services;
     }

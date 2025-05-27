@@ -1,5 +1,7 @@
 using Budgets.Core.Commands.BudgetManagement.Dtos;
 using Budgets.Core.Commands.BudgetManagement.Services;
+using Budgets.Core.Queries.Budget;
+using Budgets.Core.Queries.Budget.Dtos;
 using Budgets.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +10,26 @@ namespace Budgets.Api.Controllers;
 public class BudgetController : BudgetBaseController
 {
     private readonly IBudgetManagement _budgetManagementService;
+    private readonly IBudgetQueryService _budgetQueryService;
 
-    public BudgetController(IBudgetManagement budgetManagementService)
+    public BudgetController(IBudgetManagement budgetManagementService, IBudgetQueryService budgetQueryService)
     {
         _budgetManagementService = budgetManagementService;
+        _budgetQueryService = budgetQueryService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetBudgets(CancellationToken cancellationToken)
+    {
+        var budgets = await _budgetQueryService.GetAllAsync(cancellationToken);
+        return Ok(budgets);
+    }
+    
+    [HttpGet("{budgetId:guid}")]
+    public async Task<IActionResult> GetBudgetById(Guid budgetId, CancellationToken cancellationToken)
+    {
+        var budgetDetails = await _budgetQueryService.GetByIdAsync(budgetId, cancellationToken);
+        return Ok(budgetDetails);
     }
 
     [HttpPost]
