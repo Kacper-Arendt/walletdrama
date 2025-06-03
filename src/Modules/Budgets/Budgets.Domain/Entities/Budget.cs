@@ -9,6 +9,7 @@ public class Budget
     public UserId OwnerId { get; init; }
 
     public BudgetDetails Details { get; init; }
+    public IEnumerable<Category> Categories { get; set; } = new List<Category>();
 
     private Budget()
     {
