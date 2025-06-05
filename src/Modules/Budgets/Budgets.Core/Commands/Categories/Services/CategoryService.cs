@@ -54,7 +54,7 @@ public class CategoryService : ICategoryService
         if (category is null)
             throw new CategoryNotFoundException(updateCategoryDto.Id);
 
-        if (category.BudgetId != budget.Id)
+        if (!category.BudgetId.Equals(budget.Id))
             throw new BudgetNotFoundException(updateCategoryDto.BudgetId);
 
         category.Update(

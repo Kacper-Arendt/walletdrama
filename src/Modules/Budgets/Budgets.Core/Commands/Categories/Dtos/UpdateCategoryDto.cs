@@ -19,8 +19,5 @@ public class UpdateCategoryDto
     public Guid BudgetId { get; set; }
     
     [Required]
-    public bool IsActive { get; set; } = true;
-    
-    [Required]
     public TransactionType Type { get; set; }
 }

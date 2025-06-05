@@ -33,14 +33,14 @@ public class CategoriesController : BudgetBaseController
     }
 
     [HttpPut]
-    [Route("{budgetId:guid}")]
-    public async Task<IActionResult> UpdateCategory(Guid budgetId, [FromBody] UpdateCategoryDto categoryDto,
+    [Route("{categoryId:guid}")]
+    public async Task<IActionResult> UpdateCategory(Guid categoryId, [FromBody] UpdateCategoryDto categoryDto,
         CancellationToken cancellationToken)
     {
-        var isValid = new BudgetId(categoryDto.BudgetId).Equals(new BudgetId(budgetId));
+        var isValid = new CategoryId(categoryDto.Id).Equals(new CategoryId(categoryId));
         if (!isValid)
         {
-            return BadRequest("Budget ID in the URL does not match the ID in the request body.");
+            return BadRequest("CategoryId in the URL does not match the ID in the request body.");
         }
 
         await _categoryService.UpdateAsync(categoryDto, cancellationToken);

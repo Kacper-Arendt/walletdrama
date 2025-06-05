@@ -8,7 +8,6 @@ public record CategoryDto
     public Guid Id { get; init; }
     public string Name { get; init; } = string.Empty;
     public string Description { get; init; } = string.Empty;
-    public Guid BudgetId { get; init; }
     public bool IsActive { get; init; }
     public TransactionType Type { get; init; }
 
@@ -17,7 +16,6 @@ public record CategoryDto
         return new CategoryDto
         {
             Id = category.Id.Value,
-            BudgetId = category.BudgetId.Value,
             Name = category.Name.Value,
             Description = category.Description,
             IsActive = category.IsActive,

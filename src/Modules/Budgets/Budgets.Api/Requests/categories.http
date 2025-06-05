@@ -1,0 +1,36 @@
+@budgetid = 5b59a295-8906-49d0-8abe-fcab983ad68f
+@url = http://localhost:5269/api/budgets/{{budgetid}}/categories
+
+### POST create
+POST {{url}}
+Content-Type: application/json
+
+{
+  "name": "Default Budget",
+  "description": "This is a default budget description.",
+  "budgetId": "{{budgetid}}",
+  "type": 1
+}
+
+###
+@id = 7dc8b0f1-03c7-42cd-9c04-7b1d571d2581
+
+### PUT update
+PUT {{url}}/{{id}}
+Content-Type: application/json
+
+{
+  "id": "{{id}}",
+  "name": "Default Budget 2",
+  "description": "This is a default budget description.",
+  "budgetId": "{{budgetid}}",
+  "type": 1
+}
+
+### DELETE 
+DELETE {{url}}/{{id}}
+Content-Type: application/json
+
+### GET all
+GET {{url}}
+
