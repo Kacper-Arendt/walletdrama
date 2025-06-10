@@ -22,7 +22,7 @@ public class CategoryQueryService(BudgetDbContext budgetDbContext, HttpContextHe
         
         var categories = await budgetDbContext.Categories
             .AsNoTracking()
-            .Where(c => c.BudgetId == budgetId)
+            .Where(c => c.BudgetId == budgetId && c.IsActive)
             .ToListAsync(cancellationToken);
         
         return categories.Select(CategoryDto.FromDomain);

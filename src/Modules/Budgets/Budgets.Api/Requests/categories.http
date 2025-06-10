@@ -6,10 +6,10 @@ POST {{url}}
 Content-Type: application/json
 
 {
-  "name": "Default Budget",
-  "description": "This is a default budget description.",
+  "name": "Default jak",
+  "description": "This is scriasdptdsadion.adsnaksdn adna dna dasn dasd malskd nasd masldmasld masd masdl masld malsd asd nasd ma asda dasd asd asd asd asd adsda dan dkjasndnajk dna  dna dasn dasd malskd nasd masldmasld masd masdl masld malsd asd nasd ma asda dasd asd",
   "budgetId": "{{budgetid}}",
-  "type": 1
+  "type": 2
 }
 
 ###

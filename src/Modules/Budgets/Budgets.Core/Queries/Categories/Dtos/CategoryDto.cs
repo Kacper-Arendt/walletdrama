@@ -10,6 +10,7 @@ public record CategoryDto
     public string Description { get; init; } = string.Empty;
     public bool IsActive { get; init; }
     public TransactionType Type { get; init; }
+    public Guid BudgetId { get; init; }
 
     public static CategoryDto FromDomain(Category category)
     {
@@ -19,7 +20,8 @@ public record CategoryDto
             Name = category.Name.Value,
             Description = category.Description,
             IsActive = category.IsActive,
-            Type = category.Type
+            Type = category.Type,
+            BudgetId = category.BudgetId.Value
         };
     }
 };
