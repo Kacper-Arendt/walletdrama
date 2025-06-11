@@ -10,6 +10,7 @@ public class Budget
 
     public BudgetDetails Details { get; init; }
     public IEnumerable<Category> Categories { get; set; } = new List<Category>();
+    public IEnumerable<BudgetYear> Years { get; set; } = new List<BudgetYear>();
 
     private Budget()
     {
@@ -27,4 +28,26 @@ public class Budget
         Details.Name = name;
         Details.Description = description;
     }
+    
+    public void AddYear(BudgetYear year)
+    {
+        if (Years.Any(y => y.Year.Equals(year.Year)))
+            throw new InvalidOperationException($"Year {year.Year} already exists in the budget {Details.Name}.");
+
+        Years = Years.Append(year);
+    }
+    
+    public void RemoveYear(BudgetYear year)
+    {
+        if (!Years.Any(y => y.Year.Equals(year.Year)))
+            throw new InvalidOperationException($"Year {year.Year} does not exist in the budget {Details.Name}.");
+
+        Years = Years.Where(y => !y.Year.Equals(year.Year));
+    }
+    
+    public BudgetYear? GetYear(Year year)
+        => Years.FirstOrDefault(y => y.Year.Equals(year));
+    
+    public IEnumerable<BudgetYear> GetAllYears()
+        => Years;
 }
